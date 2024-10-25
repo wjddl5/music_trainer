@@ -1,11 +1,12 @@
 package com.app.music_trainer.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Entity
 @Table(name = "scales")
 public class Scale {
 
@@ -27,51 +29,51 @@ public class Scale {
   @Column(name = "scale_name", nullable = false)
   private String scName;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note1", referencedColumnName = "note_idx", nullable = false)
-  private Integer scNote1;
+  private Note scNote1;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note2", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote2;
+  private Note scNote2;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note3", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote3;
+  private Note scNote3;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note4", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote4;
+  private Note scNote4;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note5", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote5;
+  private Note scNote5;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note6", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote6;
+  private Note scNote6;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note7", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote7;
+  private Note scNote7;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note8", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote8;
+  private Note scNote8;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note9", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote9;
+  private Note scNote9;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note10", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote10;
+  private Note scNote10;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note11", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote11;
+  private Note scNote11;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "scale_note12", referencedColumnName = "note_idx", nullable = true)
-  private Integer scNote12;
+  private Note scNote12;
 }

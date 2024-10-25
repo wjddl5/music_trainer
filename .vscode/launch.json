@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-MusicTrainerApplication<be>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.app.music_trainer.MusicTrainerApplication",
+      "projectName": "be",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

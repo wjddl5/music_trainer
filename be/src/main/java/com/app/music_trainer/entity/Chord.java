@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,31 +29,31 @@ public class Chord {
   @Column(name = "chord_name", nullable = false)
   private String chName;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "chord_tone1", referencedColumnName = "note_idx", nullable = false)
-  private Integer chTone1;
+  private Note chTone1;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "chord_tone2", referencedColumnName = "note_idx", nullable = false)
-  private Integer chTone2;
+  private Note chTone2;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "chord_tone3", referencedColumnName = "note_idx", nullable = true)
-  private Integer chTone3;
+  private Note chTone3;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "chord_tone4", referencedColumnName = "note_idx", nullable = true)
-  private Integer chTone4;
+  private Note chTone4;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "chord_tone5", referencedColumnName = "note_idx", nullable = true)
-  private Integer chTone5;
+  private Note chTone5;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "chord_tone6", referencedColumnName = "note_idx", nullable = true)
-  private Integer chTone6;
+  private Note chTone6;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "chord_tone7", referencedColumnName = "note_idx", nullable = true)
-  private Integer chTone7;
+  private Note chTone7;
 }

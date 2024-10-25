@@ -3,7 +3,7 @@ package com.app.music_trainer.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.music_trainer.entity.Chord;
+import com.app.music_trainer.dto.ChordDto;
 import com.app.music_trainer.service.ChordService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class ChordController {
   private ChordService chordService;
 
   @GetMapping("")
-  public ResponseEntity<Chord> getChord(@RequestParam Integer id) {
+  public ResponseEntity<ChordDto> getChord(@RequestParam Integer id) {
     return ResponseEntity.ok(chordService.getChord(id));
   }
 
