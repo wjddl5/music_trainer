@@ -23,7 +23,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.instrument-card.selected {
+.instrument-card.hover {
   border: 2px solid #00bfa5;
   box-shadow: 0 4px 12px rgba(0, 191, 165, 0.4);
 }
