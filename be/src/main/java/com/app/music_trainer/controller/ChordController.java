@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.music_trainer.dto.ChordDto;
 import com.app.music_trainer.service.ChordService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,11 @@ public class ChordController {
 
   @Autowired
   private ChordService chordService;
+
+  @GetMapping("/all")
+  public List<ChordDto> getChordList() {
+    return chordService.getChordList();
+  }
 
   @GetMapping("")
   public ResponseEntity<ChordDto> getChord(@RequestParam Integer id) {

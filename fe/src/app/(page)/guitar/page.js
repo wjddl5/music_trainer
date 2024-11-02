@@ -2,22 +2,22 @@
 import React, { useEffect, useState } from "react";
 import "../../style/css/Fretboard.css";
 import axios from "axios";
-import { Button, MenuItem, Select } from "@mui/material";
+import { Button, MenuItem, Select, Switch } from "@mui/material";
 
 export default function page() {
   const API_URL = "/api/chord";
 
   // Setting
-  const [key, setKey] = useState(1);
-  const [keyStr, setKeyStr] = useState("C");
-  const [string, setString] = useState(6);
+  const [key, setKey] = useState(4); // C key
+  const [string, setString] = useState(6); // count of guitar string
+  const [keySign, setKeySign] = useState(true); // key signature : true = sharp(#), false = flat(b)
+  const [viewKeySign, setViewKeySign] = useState(true);
 
   // Chord
+  const [chordList, setChordList] = useState([]);
   const [chordId, setChordId] = useState(1);
-  const [chordName, setChordName] = useState("Major");
 
   const [chordToneAr, setChordToneAr] = useState([]);
-
   const [chordTone1, setChordTone1] = useState(null);
   const [chordTone2, setChordTone2] = useState(null);
   const [chordTone3, setChordTone3] = useState(null);
@@ -27,16 +27,22 @@ export default function page() {
   const [chordTone7, setChordTone7] = useState(null);
 
   useEffect(() => {
-    getData();
+    getChordList();
   }, []);
 
-  function getData() {
+  // Axios Function
+  function getChordList() {
+    axios.get(`${API_URL}/all`).then((res) => {
+      console.log(res.data);
+      setChordList(res.data);
+    });
+  }
+
+  function getChord() {
     axios.get(API_URL, { params: { id: chordId } }).then((res) => {
       var ar = Object.keys(res.data)
         .filter((key) => key.startsWith("chTone"))
         .map((key) => res.data[key]);
-
-      console.log(JSON.stringify(ar));
       Interval(ar);
     });
   }
@@ -58,55 +64,52 @@ export default function page() {
   }
 
   function selectKey(event) {
-    var key_num = 1;
-    var key_str = event.target.value;
-
-    switch (key_str) {
-      case "C":
-        key_num = 4;
-        break;
-      case "D":
-        key_num = 6;
-        break;
-      case "E":
-        key_num = 8;
-        break;
-    }
-    setKey(key_num);
-    setKeyStr(key_str);
+    setKey(event.target.value);
   }
 
   function selectChord(event) {
-    var chord_str = event.target.value;
+    setChordId(event.target.value);
+  }
 
-    switch (chord_str) {
-      case "Major":
-        setChordId(1);
-        break;
-      case "minor":
-        setChordId(2);
-        break;
-    }
+  function selectKeySign() {
+    if (keySign) setKeySign(false);
+    else setKeySign(true);
   }
 
   function search() {
-    getData();
+    getChord();
   }
 
   return (
     <div>
-      <Select id="key-select" value={keyStr} label="Key" onChange={selectKey}>
-        <MenuItem value={"C"}>C</MenuItem>
-        <MenuItem value={"D"}>D</MenuItem>
-        <MenuItem value={"E"}>E</MenuItem>
+      <Switch id="keySign-select" checked={keySign} onChange={selectKeySign}></Switch>
+      <Select id="key-select" value={key} label="Key" onChange={selectKey}>
+        <MenuItem value={1}>A</MenuItem>
+        <MenuItem value={2}>{keySign ? "A#" : "Bb"}</MenuItem>
+        <MenuItem value={3}>B</MenuItem>
+        <MenuItem value={4}>C</MenuItem>
+        <MenuItem value={5}>{keySign ? "C#" : "Db"}</MenuItem>
+        <MenuItem value={6}>D</MenuItem>
+        <MenuItem value={7}>{keySign ? "D#" : "Eb"}</MenuItem>
+        <MenuItem value={8}>E</MenuItem>
+        <MenuItem value={9}>F</MenuItem>
+        <MenuItem value={10}>{keySign ? "F#" : "Gb"}</MenuItem>
+        <MenuItem value={11}>G</MenuItem>
+        <MenuItem value={12}>{keySign ? "G#" : "Ab"}</MenuItem>
       </Select>
-      <Select id="chord-select" value={chordName} label="Chord" onChange={selectChord}>
-        <MenuItem value={"Major"}>Major</MenuItem>
-        <MenuItem value={"minor"}>minor</MenuItem>
+      <Select id="chord-select" value={chordId} label="Chord" onChange={selectChord}>
+        {chordList.map((item) => (
+          <MenuItem key={item.id} value={item.id}>
+            {item.chName}
+          </MenuItem>
+        ))}
       </Select>
-      <Button variant="contained" onClick={search}>
+      <Button id="search-btn" variant="contained" onClick={search}>
         Search
       </Button>
+      <div id="guitar-fretboard">
+        <div></div>
+      </div>
     </div>
   );
 }
