@@ -1,8 +1,8 @@
 "use client";
 // InstrumentSelectionPage.js
 import React, { useState } from "react";
-import { instruments } from "./instruments";
-import "./MainPage.css";
+import { instruments } from "./component/instruments";
+import "./style/css/mainPage.css";
 import { useRouter } from "next/navigation";
 
 function InstrumentSelectionPage() {

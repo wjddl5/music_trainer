@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import "../../style/css/Fretboard.css";
 import axios from "axios";
 import { Button, MenuItem, Select, Switch } from "@mui/material";
+import Fretboard from "@/app/component/fretboard";
 
 export default function page() {
   const API_URL = "/api/chord";
@@ -107,8 +107,8 @@ export default function page() {
       <Button id="search-btn" variant="contained" onClick={search}>
         Search
       </Button>
-      <div id="guitar-fretboard">
-        <div></div>
+      <div>
+        <Fretboard />
       </div>
     </div>
   );
