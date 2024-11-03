@@ -84,9 +84,6 @@ export default function page() {
     <div>
       <Switch id="keySign-select" checked={keySign} onChange={selectKeySign}></Switch>
       <Select id="key-select" value={key} label="Key" onChange={selectKey}>
-        <MenuItem value={1}>A</MenuItem>
-        <MenuItem value={2}>{keySign ? "A#" : "Bb"}</MenuItem>
-        <MenuItem value={3}>B</MenuItem>
         <MenuItem value={4}>C</MenuItem>
         <MenuItem value={5}>{keySign ? "C#" : "Db"}</MenuItem>
         <MenuItem value={6}>D</MenuItem>
@@ -96,6 +93,9 @@ export default function page() {
         <MenuItem value={10}>{keySign ? "F#" : "Gb"}</MenuItem>
         <MenuItem value={11}>G</MenuItem>
         <MenuItem value={12}>{keySign ? "G#" : "Ab"}</MenuItem>
+        <MenuItem value={1}>A</MenuItem>
+        <MenuItem value={2}>{keySign ? "A#" : "Bb"}</MenuItem>
+        <MenuItem value={3}>B</MenuItem>
       </Select>
       <Select id="chord-select" value={chordId} label="Chord" onChange={selectChord}>
         {chordList.map((item) => (
@@ -108,7 +108,7 @@ export default function page() {
         Search
       </Button>
       <div>
-        <Fretboard />
+        <Fretboard string={string} chordToneAr={chordToneAr} keySign={keySign} />
       </div>
     </div>
   );

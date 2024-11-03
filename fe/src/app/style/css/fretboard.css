@@ -1,25 +1,30 @@
-body {
-  background: #353535;
-  font-family: Lato, sans-serif;
-}
-
 .fretboard {
   display: flex;
   flex-direction: column;
-  background: #be975b url(/images/wood-pattern.png);
+  background: #be975b url("/images/wood-pattern.png");
+  /* background: #be975b; */
   width: 100%;
   min-width: 1500px;
   height: calc(var(--fretboard-height) * 1px);
   margin-top: 50px;
 }
-
 .string {
   width: 100%;
   height: 100%;
   display: flex;
   position: relative;
 }
-
+.string:before {
+  content: "";
+  width: 100%;
+  height: calc(var(--string-height) * 1px);
+  background: linear-gradient(#eee, #999);
+  box-shadow: 76px 3px 10px #806233;
+  z-index: 1;
+  position: absolute;
+  top: 22px;
+  top: calc(var(--string-top-position) * 1px);
+}
 .fret {
   display: flex;
   flex: 1;
@@ -29,7 +34,6 @@ body {
   align-items: center;
   position: relative;
 }
-
 .fret:first-child {
   background: #161717;
   min-width: 76px;
@@ -38,8 +42,7 @@ body {
   flex-shrink: 0;
   border-image: linear-gradient(to left, #bbb, #fff, #bbb) 1 100%;
 }
-
-.fret:before {
+.fret.highlight {
   content: attr(data-note);
   width: 33px;
   height: 33px;
