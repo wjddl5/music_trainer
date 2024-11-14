@@ -26,7 +26,7 @@ public class ChordController {
   }
 
   @GetMapping("")
-  public ResponseEntity<ChordDto> getChord(@RequestParam Integer id) {
+  public ResponseEntity<ChordDto> getChord(@RequestParam(value = "id") Integer id) {
     return ResponseEntity.ok(chordService.getChord(id));
   }
 

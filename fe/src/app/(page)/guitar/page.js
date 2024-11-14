@@ -33,7 +33,6 @@ export default function page() {
   // Axios Function
   function getChordList() {
     axios.get(`${API_URL}/all`).then((res) => {
-      console.log(res.data);
       setChordList(res.data);
     });
   }
@@ -60,7 +59,6 @@ export default function page() {
       }
     });
     setChordToneAr(ar);
-    console.log("ar :: " + ar);
   }
 
   function selectKey(event) {
@@ -69,6 +67,10 @@ export default function page() {
 
   function selectChord(event) {
     setChordId(event.target.value);
+  }
+
+  function selectString(event) {
+    setString(event.target.value);
   }
 
   function selectKeySign() {
@@ -83,6 +85,11 @@ export default function page() {
   return (
     <div>
       <Switch id="keySign-select" checked={keySign} onChange={selectKeySign}></Switch>
+      <Select id="string-select" value={string} label={"String"} onChange={selectString}>
+        <MenuItem value={6}>6 String</MenuItem>
+        <MenuItem value={7}>7 String</MenuItem>
+        <MenuItem value={8}>8 String</MenuItem>
+      </Select>
       <Select id="key-select" value={key} label="Key" onChange={selectKey}>
         <MenuItem value={4}>C</MenuItem>
         <MenuItem value={5}>{keySign ? "C#" : "Db"}</MenuItem>

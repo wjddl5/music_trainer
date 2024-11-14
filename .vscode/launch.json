@@ -9,6 +9,16 @@
       "projectName": "be",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-MusicTrainerApplication<music_trainer-be>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.app.music_trainer.MusicTrainerApplication",
+      "projectName": "music_trainer-be",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
