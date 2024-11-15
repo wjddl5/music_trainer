@@ -34,7 +34,8 @@
   align-items: center;
   position: relative;
 }
-.fret:first-child {
+.zeroFret {
+  text-decoration-color: #fff;
   background: #161717;
   min-width: 76px;
   border-right: 12px solid;
@@ -53,4 +54,8 @@
   z-index: 2;
   color: #eee;
   opacity: var(--noteDotOpacity);
+}
+
+.tune-select{
+  border: 1px solid red;
 }

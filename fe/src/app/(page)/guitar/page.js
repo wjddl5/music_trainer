@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, MenuItem, Select, Switch } from "@mui/material";
+import { Button, MenuItem, Select, Switch, TextField } from "@mui/material";
 import Fretboard from "@/app/component/fretboard";
 
 export default function page() {
@@ -9,7 +9,9 @@ export default function page() {
 
   // Setting
   const [key, setKey] = useState(4); // C key
+  const [tune, setTune] = useState([8, 3, 11, 6, 1, 8, 3, 10]); // default tune of guitar
   const [string, setString] = useState(6); // count of guitar string
+  const [fret, setFret] = useState(22); // count of guitar fret
   const [keySign, setKeySign] = useState(true); // key signature : true = sharp(#), false = flat(b)
   const [viewKeySign, setViewKeySign] = useState(true);
 
@@ -73,6 +75,11 @@ export default function page() {
     setString(event.target.value);
   }
 
+  function selectFret(event) {
+    setFret(event.target.value);
+    return fret-1;
+  }
+
   function selectKeySign() {
     if (keySign) setKeySign(false);
     else setKeySign(true);
@@ -90,6 +97,7 @@ export default function page() {
         <MenuItem value={7}>7 String</MenuItem>
         <MenuItem value={8}>8 String</MenuItem>
       </Select>
+      <TextField type="number" defaultValue={fret} InputProps={{ inputProps: { min: 13, max: 31 } }} onChange={selectFret}></TextField>
       <Select id="key-select" value={key} label="Key" onChange={selectKey}>
         <MenuItem value={4}>C</MenuItem>
         <MenuItem value={5}>{keySign ? "C#" : "Db"}</MenuItem>
@@ -115,7 +123,7 @@ export default function page() {
         Search
       </Button>
       <div>
-        <Fretboard string={string} chordToneAr={chordToneAr} keySign={keySign} />
+        <Fretboard tune={tune} string={string} chordToneAr={chordToneAr} keySign={keySign} fret={fret}/>
       </div>
     </div>
   );
