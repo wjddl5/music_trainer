@@ -1,8 +1,7 @@
 .fretboard {
   display: flex;
   flex-direction: column;
-  background: #be975b url("/images/wood-pattern.png");
-  /* background: #be975b; */
+  background: #be975b url('/images/wood-pattern.png');
   width: 100%;
   min-width: 1500px;
   height: calc(var(--fretboard-height) * 1px);
@@ -15,7 +14,7 @@
   position: relative;
 }
 .string:before {
-  content: "";
+  content: '';
   width: 100%;
   height: calc(var(--string-height) * 1px);
   background: linear-gradient(#eee, #999);
@@ -35,13 +34,22 @@
   position: relative;
 }
 .zeroFret {
+  position: relative;
   text-decoration-color: #fff;
-  background: #161717;
+  background: #ffffdd;
   min-width: 76px;
+  max-width: 130px;
   border-right: 12px solid;
   flex-grow: 0;
   flex-shrink: 0;
   border-image: linear-gradient(to left, #bbb, #fff, #bbb) 1 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+.tune-select {
+  display: block;
+  margin: 5px 0;
 }
 .fret.highlight {
   content: attr(data-note);
@@ -54,8 +62,4 @@
   z-index: 2;
   color: #eee;
   opacity: var(--noteDotOpacity);
-}
-
-.tune-select{
-  border: 1px solid red;
 }

@@ -1,52 +1,50 @@
-/* InstrumentSelectionPage.css */
-
 .instrument-page {
-  text-align: center;
-  background-color: #1e1e1e;
-  color: #fff;
-  padding: 20px;
+    text-align: center;
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 20px;
 }
 
 .instrument-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 20px;
-  padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .instrument-card {
-  background: #333;
-  border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: #333;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .instrument-card.hover {
-  border: 2px solid #00bfa5;
-  box-shadow: 0 4px 12px rgba(0, 191, 165, 0.4);
+    border: 2px solid #00bfa5;
+    box-shadow: 0 4px 12px rgba(0, 191, 165, 0.4);
 }
 
 .instrument-card:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .instrument-image {
-  width: 100%;
-  border-radius: 8px;
+    width: 100%;
+    border-radius: 8px;
 }
 
 .instrument-info {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .instrument-info h3 {
-  margin: 0;
-  font-size: 1.2em;
+    margin: 0;
+    font-size: 1.2em;
 }
 
 .instrument-info p {
-  font-size: 0.9em;
-  color: #aaa;
+    font-size: 0.9em;
+    color: #aaa;
 }
