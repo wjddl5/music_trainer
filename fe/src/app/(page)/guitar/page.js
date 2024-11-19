@@ -1,18 +1,19 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Button, MenuItem, Select, Switch, TextField } from "@mui/material";
-import Fretboard from "@/app/component/fretboard";
+'use client';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Button, MenuItem, Select, Switch, TextField } from '@mui/material';
+import Fretboard from '@/app/component/fretboard';
 
 export default function page() {
-  const API_URL = "/api/chord";
+  const API_URL = '/api/chord';
 
   // Setting
-  const [key, setKey] = useState(4); // C key
+  const [root, setRoot] = useState(4); // root note, default key C
   const [tune, setTune] = useState([8, 3, 11, 6, 1, 8, 3, 10]); // default tune of guitar
   const [string, setString] = useState(6); // count of guitar string
   const [fret, setFret] = useState(22); // count of guitar fret
   const [keySign, setKeySign] = useState(true); // key signature : true = sharp(#), false = flat(b)
+  const [allNote, setAllNote] = useState(false); // view all note
   const [viewKeySign, setViewKeySign] = useState(true);
 
   // Chord
@@ -42,7 +43,7 @@ export default function page() {
   function getChord() {
     axios.get(API_URL, { params: { id: chordId } }).then((res) => {
       var ar = Object.keys(res.data)
-        .filter((key) => key.startsWith("chTone"))
+        .filter((key) => key.startsWith('chTone'))
         .map((key) => res.data[key]);
       Interval(ar);
     });
@@ -53,7 +54,7 @@ export default function page() {
     ar.forEach((value, index) => {
       var num = 0;
       if (value != null) {
-        num = value.id + (key - 1);
+        num = value.id + (root - 1);
         if (num > 12) {
           num -= 12;
         }
@@ -63,8 +64,8 @@ export default function page() {
     setChordToneAr(ar);
   }
 
-  function selectKey(event) {
-    setKey(event.target.value);
+  function selectRoot(event) {
+    setRoot(event.target.value);
   }
 
   function selectChord(event) {
@@ -77,12 +78,16 @@ export default function page() {
 
   function selectFret(event) {
     setFret(event.target.value);
-    return fret-1;
+    return fret - 1;
   }
 
   function selectKeySign() {
     if (keySign) setKeySign(false);
     else setKeySign(true);
+  }
+  function selectAllNote() {
+    if (allNote) setAllNote(false);
+    else setAllNote(true);
   }
 
   function search() {
@@ -92,24 +97,25 @@ export default function page() {
   return (
     <div>
       <Switch id="keySign-select" checked={keySign} onChange={selectKeySign}></Switch>
-      <Select id="string-select" value={string} label={"String"} onChange={selectString}>
+      <Switch id="allNote-select" checked={allNote} onChange={selectAllNote}></Switch>
+      <Select id="string-select" value={string} label={'String'} onChange={selectString}>
         <MenuItem value={6}>6 String</MenuItem>
         <MenuItem value={7}>7 String</MenuItem>
         <MenuItem value={8}>8 String</MenuItem>
       </Select>
-      <TextField type="number" defaultValue={fret} InputProps={{ inputProps: { min: 13, max: 31 } }} onChange={selectFret}></TextField>
-      <Select id="key-select" value={key} label="Key" onChange={selectKey}>
+      <TextField type="number" defaultValue={fret} InputProps={{ inputProps: { min: 12, max: 30 } }} onChange={selectFret}></TextField>
+      <Select id="root-select" value={root} label="root" onChange={selectRoot}>
         <MenuItem value={4}>C</MenuItem>
-        <MenuItem value={5}>{keySign ? "C#" : "Db"}</MenuItem>
+        <MenuItem value={5}>{keySign ? 'C#' : 'Db'}</MenuItem>
         <MenuItem value={6}>D</MenuItem>
-        <MenuItem value={7}>{keySign ? "D#" : "Eb"}</MenuItem>
+        <MenuItem value={7}>{keySign ? 'D#' : 'Eb'}</MenuItem>
         <MenuItem value={8}>E</MenuItem>
         <MenuItem value={9}>F</MenuItem>
-        <MenuItem value={10}>{keySign ? "F#" : "Gb"}</MenuItem>
+        <MenuItem value={10}>{keySign ? 'F#' : 'Gb'}</MenuItem>
         <MenuItem value={11}>G</MenuItem>
-        <MenuItem value={12}>{keySign ? "G#" : "Ab"}</MenuItem>
+        <MenuItem value={12}>{keySign ? 'G#' : 'Ab'}</MenuItem>
         <MenuItem value={1}>A</MenuItem>
-        <MenuItem value={2}>{keySign ? "A#" : "Bb"}</MenuItem>
+        <MenuItem value={2}>{keySign ? 'A#' : 'Bb'}</MenuItem>
         <MenuItem value={3}>B</MenuItem>
       </Select>
       <Select id="chord-select" value={chordId} label="Chord" onChange={selectChord}>
@@ -123,7 +129,7 @@ export default function page() {
         Search
       </Button>
       <div>
-        <Fretboard tune={tune} string={string} chordToneAr={chordToneAr} keySign={keySign} fret={fret}/>
+        <Fretboard tune={tune} string={string} chordToneAr={chordToneAr} keySign={keySign} fret={fret} allNote={allNote} />
       </div>
     </div>
   );
